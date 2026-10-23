@@ -1,0 +1,1878 @@
+SMARTCLASS DEV
+
+MASTER PROMPT: COMPLETE ONLINE CLASSROOM, SOFTWARE DEVELOPMENT IDE, AND OFFLINE LEARNING PLATFORM
+
+1. PROJECT OVERVIEW
+
+Act as a senior software architect, full-stack developer, UI/UX designer, database engineer, cybersecurity engineer, DevOps engineer, and real-time communication engineer.
+
+Design and develop a complete, secure, scalable, modern educational technology platform named SmartClass Dev.
+
+SmartClass Dev is an integrated online classroom and software development learning platform that enables students to continue learning after leaving physical school. Students must be able to attend live classes, study independently, communicate with teachers and classmates, research information, read digital books, write and execute programming code, build software projects, complete quizzes, track academic progress, and receive certificates.
+
+The platform must support:
+
+1. Web application.
+2. Desktop application.
+3. Android application.
+4. iOS application.
+5. Online learning.
+6. Offline learning and offline coding for supported programming languages.
+7. Real-time online classrooms.
+8. Software development education.
+9. Teacher and school administration.
+10. Secure student management.
+
+Build a real, functional application, not merely a static UI prototype.
+
+All buttons, forms, menus, navigation items, counters, dashboards, and actions must be connected to their intended functionality. Do not use fake statistics or hardcoded sample data in production features.
+
+Use realistic demo data only in explicitly identified development and testing environments.
+
+---
+
+2. CORE PRODUCT VISION
+
+SmartClass Dev must combine the most important capabilities of:
+
+- A modern Learning Management System (LMS).
+- A live video classroom platform.
+- A secure messaging application.
+- A digital library.
+- An AI research engine.
+- A multi-language programming IDE.
+- An online code execution platform.
+- An offline-first educational application.
+- A quiz and assessment platform.
+- An attendance management system.
+- A certificate management system.
+
+The interface must be modern, responsive, accessible, professional, easy to understand, and optimized for students and teachers.
+
+Avoid an unnecessarily complicated interface.
+
+Use reusable components, consistent spacing, clear typography, recognizable icons, accessible forms, responsive layouts, useful loading states, and understandable error messages.
+
+Support light mode and dark mode.
+
+Prepare the platform for internationalization, including English and Kinyarwanda.
+
+---
+
+3. TECHNOLOGY STACK
+
+Use the following architecture unless a documented technical limitation requires an alternative.
+
+Frontend Web
+
+- React.js.
+- TypeScript.
+- Vite.
+- React Router.
+- A consistent component library or custom reusable UI system.
+- Lucide React or an equivalent icon library.
+- Monaco Editor for the browser-based coding environment.
+- WebRTC for real-time media communication.
+- Socket.IO client for real-time application events.
+
+Backend
+
+- Node.js.
+- Express.js.
+- TypeScript.
+- REST API.
+- Socket.IO for real-time events.
+- WebRTC signaling services.
+- Background jobs for asynchronous processing.
+
+Database
+
+- MySQL as the primary relational database.
+- Database migrations.
+- Foreign keys and appropriate indexes.
+- Transactions for operations requiring consistency.
+- UTC timestamps with consistent timezone conversion.
+
+Authentication and Security
+
+- Secure session-based authentication or securely implemented token authentication.
+- Password hashing using Argon2id or an appropriately configured alternative.
+- Server-side authorization.
+- Role-Based Access Control (RBAC).
+- Input validation.
+- Rate limiting.
+- Audit logging.
+- Secure file upload validation.
+
+Desktop
+
+- Electron with the React frontend.
+
+Mobile
+
+- React Native with TypeScript.
+- Shared backend APIs.
+- Platform-appropriate storage and authentication.
+
+Offline Web Support
+
+- Service Workers.
+- IndexedDB.
+- Offline asset caching.
+- Local project storage.
+- A synchronization queue.
+- Conflict detection and recovery.
+
+Infrastructure
+
+- Docker for reproducible development environments where appropriate.
+- Environment variables for secrets.
+- Automated tests.
+- Git and GitHub.
+- CI/CD preparation.
+- Cloud deployment support.
+
+Do not store credentials, API keys, signing secrets, or database passwords in frontend source code.
+
+---
+
+4. USER ROLES AND ROLE-BASED ACCESS CONTROL
+
+Implement strict server-side RBAC.
+
+4.1 Super Administrator
+
+Permissions:
+
+- Manage the entire platform.
+- Create and manage schools or organizations.
+- Manage school administrators.
+- Manage global configuration.
+- Review platform-wide audit events.
+- Manage approved integrations.
+- Monitor system health.
+- Manage platform-wide security policies.
+
+4.2 School Administrator
+
+Permissions:
+
+- Manage their own school.
+- Create and manage classrooms.
+- Approve or manage users according to school policy.
+- Assign teachers.
+- Manage subjects, classes, trades, combinations, and sections.
+- Configure classroom rules.
+- Generate or revoke classroom access codes.
+- View school attendance reports.
+- Manage announcements.
+- Manage school learning resources.
+- Review relevant audit logs.
+
+School administrators must not access unrelated schools.
+
+4.3 Teacher
+
+Permissions:
+
+- Manage assigned classes and subjects.
+- Create learning materials.
+- Schedule live lessons.
+- Start and end live sessions.
+- Generate live-session passcodes.
+- Create quizzes and assignments.
+- View authorized student submissions.
+- Grade assessments.
+- Manage attendance for assigned classes.
+- Publish announcements.
+- Share learning materials.
+- Approve eligible course completions.
+- Issue certificates when authorized.
+- View student progress within assigned classes.
+
+4.4 Student
+
+Permissions:
+
+- Access assigned classrooms.
+- Attend authorized live lessons.
+- Use the coding IDE.
+- Create and manage personal projects.
+- Read authorized learning resources.
+- Send and receive permitted messages.
+- Complete quizzes and assignments.
+- View personal scores and progress.
+- View attendance records.
+- Receive eligible certificates.
+- Update permitted profile information.
+
+Students must not access administrative functions or other students' private records.
+
+4.5 Student Mentor
+
+An optional role for students authorized to support classmates.
+
+Permissions must be explicitly granted and limited to approved mentoring activities.
+
+Student mentors must not automatically receive teacher or administrator privileges.
+
+4.6 Parent or Guardian
+
+An optional role that can view only the students linked to the parent or guardian through a verified relationship.
+
+Possible features:
+
+- Learning progress.
+- Attendance summaries.
+- Approved announcements.
+- Certificate achievements.
+- Teacher communications permitted by school policy.
+
+4.7 Authorization Requirements
+
+- Never trust a role supplied by the frontend.
+- Validate permissions on every protected API operation.
+- Enforce organization and classroom boundaries.
+- Prevent privilege escalation.
+- Validate ownership before allowing file access or project modification.
+- Record important administrative actions.
+- Provide meaningful 401 and 403 responses.
+- Protect privileged accounts with stronger security controls.
+
+---
+
+5. AUTHENTICATION: LOGIN AND REGISTRATION
+
+5.1 Login Page
+
+Create a professional login page containing:
+
+- SmartClass Dev logo.
+- Platform description.
+- Email input.
+- Password input.
+- Classroom selector, where appropriate.
+- Sign In button.
+- Sign Up link.
+- Forgot Password link.
+- Show/Hide Password control.
+- Form validation.
+- Loading indicators.
+- Clear error messages.
+
+Example introduction:
+
+"Learn. Practice. Build. Continue your education anywhere."
+
+The classroom selector must display only appropriate classroom options.
+
+Selecting a classroom must not independently grant access to it.
+
+5.2 Registration Page
+
+Required fields:
+
+- First Name.
+- Last Name.
+- Email.
+- Password.
+- Confirm Password.
+- Class.
+- Trade, combination, or section.
+- Terms and Conditions checkbox.
+- Sign Up button.
+- Sign In link.
+
+Requirements:
+
+- Validate all fields.
+- Enforce unique email addresses.
+- Apply secure password policies.
+- Normalize and validate email addresses.
+- Verify email addresses where email delivery is configured.
+- Prevent duplicate submissions.
+- Display useful validation messages.
+- Apply appropriate abuse prevention.
+
+Students may self-register if registration is enabled.
+
+Teacher, School Administrator, and Super Administrator privileges must be granted through authorized administrative workflows.
+
+5.3 Authentication Flow
+
+Implement:
+
+1. Registration.
+2. Login.
+3. Logout.
+4. Session expiration.
+5. Password reset.
+6. Email verification when configured.
+7. Optional multi-factor authentication for privileged users.
+8. Secure session management.
+9. Protected routes.
+10. Account status validation.
+
+Do not place passwords or long-lived sensitive credentials in localStorage.
+
+---
+
+6. CLASSROOM ACCESS AND PASSCODE MANAGEMENT
+
+Create a dedicated Classroom Access page.
+
+6.1 Classroom Access Interface
+
+Display:
+
+- Classroom name, if already known.
+- Enter Passcode input.
+- Enter/Open button.
+- Classroom Rules Board.
+- Accept Rules checkbox.
+- Accept & Continue button.
+- Clear success and failure messages.
+
+Example placeholder:
+
+"Enter your passcode"
+
+6.2 Passcode Types
+
+Implement separate access mechanisms for:
+
+1. Classroom enrollment or access.
+2. Live lesson access.
+3. Quiz access.
+
+Each passcode must be associated with the appropriate resource and permission scope.
+
+6.3 Passcode Lifecycle
+
+Authorized teachers and administrators can:
+
+- Generate a passcode.
+- View its active status.
+- Configure expiration.
+- Revoke it.
+- Replace it.
+- View appropriate usage records.
+
+Passcodes must be generated securely.
+
+Store only a protected representation of passcodes where feasible.
+
+Do not expose active passcodes in public APIs or unauthorized dashboards.
+
+6.4 Validation
+
+When a student submits a passcode, validate:
+
+- Authenticated account.
+- Account status.
+- Classroom enrollment or eligibility.
+- Correct passcode.
+- Expiration.
+- Revocation status.
+- Associated classroom or session.
+- Required classroom rules acceptance.
+- Any additional access restrictions.
+
+Use rate limiting to reduce brute-force attempts.
+
+Expired and revoked passcodes must no longer work.
+
+Generating a new passcode must invalidate the previous one only when the configured policy requires it.
+
+6.5 Classroom Rules
+
+Administrators or authorized teachers can create and update rules.
+
+Record:
+
+- Rules version.
+- User who accepted the rules.
+- Acceptance timestamp.
+- Relevant classroom or organization.
+
+Require renewed acceptance when a material rules update requires it.
+
+6.6 Access Flow
+
+Registration/Login
+→ Classroom Selection
+→ Classroom Access Validation
+→ Rules Acceptance, if required
+→ Student Dashboard
+→ Live Classroom or other permitted features.
+
+Returning students should not have to repeat the same classroom enrollment process unnecessarily.
+
+---
+
+7. STUDENT DASHBOARD
+
+Create a responsive dashboard inspired by professional educational platforms.
+
+7.1 Navigation
+
+Provide an icon and accessible label for each item:
+
+1. Dashboard.
+2. Inbox.
+3. Live Classroom.
+4. Soma AI.
+5. Subjects & Courses.
+6. Digital Library.
+7. Coding IDE.
+8. Practical Projects.
+9. Quizzes.
+10. Attendance.
+11. Recordings.
+12. Certificates.
+13. Notifications.
+14. Announcements.
+15. Profile.
+16. Settings.
+
+Use a desktop sidebar and an appropriate mobile navigation pattern.
+
+Navigation visibility must reflect user permissions.
+
+7.2 Dashboard Cards
+
+Create cards for:
+
+- Unread Inbox Messages.
+- Assigned Classrooms.
+- Enrolled Subjects.
+- Completed Quizzes.
+- Practical Projects.
+- Certificates Earned.
+- Attendance Summary.
+- Learning Progress.
+
+Every card must display real data retrieved from the backend.
+
+Counters should show zero when no relevant records exist.
+
+Do not use static sample numbers in production.
+
+7.3 Online and Offline Students
+
+Display:
+
+- Active Students.
+- Inactive Students.
+- Online status.
+- Relevant classroom membership.
+
+Implement presence tracking with heartbeats, expiration, and disconnection handling.
+
+Do not treat a user as permanently online merely because they previously logged in.
+
+Respect privacy settings and organizational visibility policies.
+
+7.4 Other Dashboard Sections
+
+Include:
+
+- Recent Activities.
+- Upcoming Lessons.
+- Recent Quiz Results.
+- Latest Announcements.
+- Recent Messages.
+- Learning Progress.
+- Certificates.
+- Notifications.
+- Recently Opened Projects.
+- Recently Accessed Books.
+
+---
+
+8. LIVE CLASSROOM: WEBRTC VIDEO CONFERENCING
+
+This is one of the platform's most important modules.
+
+Implement a real-time classroom experience with an adaptive participant layout.
+
+Use the uploaded classroom sketch as the visual reference.
+
+The intended layout contains:
+
+- Multiple student camera tiles around the classroom.
+- A larger central area for the teacher or shared presentation.
+- Responsive positioning.
+- A bottom control bar.
+
+Do not reproduce the sketch as a fixed, nonfunctional image. Implement a responsive interface.
+
+8.1 Main Classroom Layout
+
+Header:
+
+- Classroom name.
+- Lesson title.
+- LIVE indicator.
+- Participant count.
+- Connection status.
+
+Main area:
+
+- Teacher video or shared presentation in a prominent central region.
+- Student video tiles around the main region where screen size permits.
+- Active speaker indicator.
+- Selected participant emphasis.
+- Responsive layout for small screens.
+
+Bottom controls:
+
+- Microphone.
+- Camera.
+- Share Screen.
+- Participants.
+- Chat.
+- Raise Hand.
+- Fullscreen.
+- Recording, when authorized.
+- Leave Classroom.
+
+8.2 WebRTC Requirements
+
+Implement:
+
+- Microphone and camera access.
+- Audio and video transmission.
+- Camera and microphone toggles.
+- Screen sharing.
+- Participant management.
+- Connection recovery.
+- Signaling.
+- ICE candidate exchange.
+- STUN/TURN configuration.
+- Device selection where supported.
+- Audio/video quality adaptation.
+- Session lifecycle management.
+
+Use a suitable SFU architecture for larger classrooms.
+
+Evaluate an established SFU such as LiveKit or mediasoup rather than attempting to implement a production media-routing engine from scratch.
+
+Do not assume WebRTC alone provides a complete scalable classroom service.
+
+8.3 Screen Sharing
+
+When a participant shares their screen:
+
+- Display the shared screen prominently.
+- Preserve audio communication when supported.
+- Allow authorized users to stop their own sharing.
+- Allow teachers to manage session participation according to permissions.
+- Restore the previous layout when sharing ends.
+
+Screen sharing must use supported browser or operating-system permission mechanisms.
+
+8.4 Teacher Controls
+
+Provide:
+
+- Start Lesson.
+- End Lesson.
+- View Participants.
+- Manage microphone permissions.
+- Manage classroom participation.
+- Share Screen.
+- Monitor connection status.
+- Start or stop authorized recording.
+- Review attendance.
+
+8.5 Student Controls
+
+Provide:
+
+- Join Lesson.
+- Leave Lesson.
+- Toggle Camera.
+- Toggle Microphone.
+- Raise Hand.
+- Send Classroom Messages.
+- Share Screen when authorized.
+- View Participants according to permissions.
+
+8.6 Leaving a Lesson
+
+When the user clicks Leave:
+
+- Display a confirmation dialog.
+- Provide Cancel and Leave options.
+- Stop the user's local media tracks.
+- Leave the session.
+- Update presence and attendance.
+- Return to the appropriate dashboard.
+
+Handle accidental disconnections and reconnect attempts appropriately.
+
+8.7 Classroom Capacity
+
+Design the media architecture to support configurable classroom sizes.
+
+Do not assume all participant videos must remain at maximum resolution simultaneously.
+
+Optimize bandwidth and processing by:
+
+- Showing active speakers.
+- Reducing off-screen video quality.
+- Allowing configurable video layouts.
+- Using adaptive bitrate.
+- Supporting audio-first participation when bandwidth is limited.
+
+8.8 Recording
+
+Implement authorized recording with:
+
+- User notifications.
+- Required consent.
+- Recording status.
+- Secure storage.
+- Access control.
+- Retention settings.
+- Deletion procedures.
+
+Do not expose recordings publicly by default.
+
+---
+
+9. INBOX AND MESSAGING
+
+Create a complete messaging module.
+
+9.1 Features
+
+- One-to-one messaging.
+- Teacher-to-student communication.
+- Approved group conversations.
+- Message history.
+- Unread message counts.
+- Read status.
+- Timestamps.
+- Typing indicators, where appropriate.
+- Real-time message delivery.
+- Notifications.
+- Search.
+- File attachments.
+- Image sharing.
+- Document and PDF sharing.
+- Audio and video file sharing.
+- Link sharing.
+
+9.2 Security
+
+- Validate conversation membership on the server.
+- Prevent unauthorized message access.
+- Validate uploaded files.
+- Apply file-size limits.
+- Restrict dangerous file types.
+- Protect download endpoints.
+- Rate-limit abusive behavior.
+- Enforce school communication policies.
+- Provide reporting and moderation mechanisms where required.
+
+Use object storage for large attachments rather than storing large media files directly in ordinary relational database fields.
+
+Store metadata and authorized references in MySQL.
+
+---
+
+10. SOMA AI: RESEARCH AND SEARCH ENGINE
+
+Create a research-focused module called Soma AI.
+
+Soma AI must not be limited to a conventional conversational interface.
+
+It should provide a research workspace.
+
+10.1 Search Capabilities
+
+Support:
+
+- Web search.
+- Search across authorized platform resources.
+- Search within digital books and learning materials.
+- Search across approved research documents.
+- Relevant source links.
+- Summaries.
+- Topic exploration.
+- Research history.
+- Saved research.
+- Related resources.
+
+10.2 Research Workflow
+
+The user enters a topic or question.
+
+The system:
+
+1. Identifies the research query.
+2. Searches available permitted sources.
+3. Retrieves relevant information.
+4. Summarizes findings.
+5. Displays source references.
+6. Distinguishes retrieved facts from generated interpretation.
+7. Allows the user to open the original sources.
+
+Never fabricate sources.
+
+If a search service is unavailable, show a clear message.
+
+10.3 Offline Research
+
+Allow users to search previously downloaded books, notes, and cached resources while offline.
+
+Clearly distinguish offline results from current web results.
+
+Do not claim that an offline search has checked the live internet.
+
+10.4 AI Integrations
+
+Use configurable provider adapters.
+
+Keep provider API keys on the server.
+
+Implement:
+
+- Timeouts.
+- Rate limits.
+- Usage limits.
+- Error handling.
+- Cost monitoring.
+- Privacy controls.
+
+The system must remain usable when an optional AI provider is unavailable.
+
+---
+
+11. DIGITAL LIBRARY
+
+Build a structured digital library.
+
+11.1 Categories
+
+Include:
+
+- Programming.
+- Web Development.
+- Databases.
+- Networking.
+- Operating Systems.
+- Software Engineering.
+- Cybersecurity.
+- Artificial Intelligence.
+- Mathematics.
+- Electronics.
+- Research.
+- General Learning Resources.
+
+Allow administrators to add more categories.
+
+11.2 Library Features
+
+- Search.
+- Category filtering.
+- Book details.
+- Author information.
+- Resource descriptions.
+- PDF reader.
+- Notes.
+- Bookmarks.
+- Recently opened resources.
+- Downloading where permitted.
+- Offline reading.
+- Teacher-uploaded materials.
+- Access restrictions.
+- Copyright and licensing metadata.
+
+11.3 Administration
+
+Authorized users can:
+
+- Upload resources.
+- Edit resource metadata.
+- Organize categories.
+- Archive resources.
+- Manage access.
+- View permitted usage information.
+
+Validate uploaded files and scan files using available security infrastructure.
+
+---
+
+12. CODING IDE: ONECOMPILER-INSPIRED DEVELOPMENT ENVIRONMENT
+
+Build an integrated development environment for learning and practicing software development.
+
+The interface should combine:
+
+- Editor.
+- File explorer.
+- Console.
+- Terminal where supported.
+- Output panel.
+- Preview.
+- Problems and errors.
+- Project controls.
+
+Use Monaco Editor for the code editing experience.
+
+12.1 Programming Language Categories
+
+Web Development
+
+- HTML.
+- CSS.
+- JavaScript.
+- TypeScript.
+
+Frontend Frameworks
+
+- React.
+- Vue.
+
+Backend Development
+
+- Node.js.
+- Python.
+- PHP.
+- Java.
+- C#.
+- Go.
+
+Systems Programming
+
+- C.
+- C++.
+- Rust.
+
+Mobile Development
+
+- Dart.
+- Flutter.
+- Kotlin.
+- Swift.
+
+Data Science
+
+- Python.
+- R.
+
+Database Development
+
+- SQL.
+- MySQL.
+- PostgreSQL.
+
+Shell and Automation
+
+- Bash.
+- PowerShell.
+
+Other Languages
+
+- Ruby.
+- Additional languages through an extensible runtime registry.
+
+Language availability must be based on implemented and tested runtime support.
+
+Do not display a language as fully executable unless its required execution environment is available.
+
+12.2 Editor Features
+
+Implement:
+
+- Syntax highlighting.
+- Code completion where supported.
+- Indentation.
+- Multiple files.
+- Tabs.
+- Search and replace.
+- File explorer.
+- Folder creation.
+- File renaming.
+- File deletion with confirmation.
+- Save.
+- Autosave.
+- Undo and redo.
+- Error display.
+- Console output.
+- Project templates.
+- Download project.
+- Import project.
+- Project history where supported.
+
+12.3 Project Structure
+
+Support multi-file projects.
+
+Example:
+
+my-project/
+frontend/
+src/
+public/
+package.json
+backend/
+src/
+routes/
+package.json
+database/
+schema.sql
+README.md
+.gitignore
+
+Allow project structures appropriate to each language.
+
+12.4 Code Execution
+
+Implement a secure execution service.
+
+Never execute arbitrary student code directly inside the main Node.js application process.
+
+Use isolated execution environments with:
+
+- CPU limits.
+- Memory limits.
+- Execution timeouts.
+- Process limits.
+- Restricted filesystem access.
+- Restricted network access by default.
+- No access to application secrets.
+- Temporary execution directories.
+- Cleanup after execution.
+- Output-size limits.
+- Per-user quotas.
+
+Use a suitable sandboxing solution or isolated execution service.
+
+Consider established tools such as Judge0 for supported online compilation tasks, subject to licensing, hosting, security, and operational requirements.
+
+12.5 Console and Terminal
+
+Provide:
+
+- Standard output.
+- Error output.
+- Compilation results.
+- Execution status.
+- Clear error messages.
+- Stop execution where supported.
+
+A browser terminal interface does not itself provide an operating-system shell.
+
+If a real shell is offered, run it inside a tightly restricted, isolated environment.
+
+12.6 Live Preview
+
+For web projects:
+
+- Render HTML, CSS, and JavaScript previews.
+- Support multi-file projects.
+- Reload preview after changes.
+- Display errors.
+- Separate preview origin from the main application.
+- Apply a restrictive Content Security Policy.
+- Prevent untrusted preview content from accessing authentication credentials or privileged APIs.
+
+12.7 Frameworks and Packages
+
+Support package installation and project dependencies where the selected runtime permits them.
+
+Provide:
+
+- Package metadata.
+- Dependency installation status.
+- Build output.
+- Dependency error messages.
+- Package cache where appropriate.
+
+Do not promise every framework or package will work offline.
+
+---
+
+13. OFFLINE-FIRST LEARNING AND CODING
+
+Offline functionality is a core requirement.
+
+The platform must clearly distinguish local functionality from services that require an internet connection.
+
+13.1 Offline Features
+
+Support offline access to:
+
+- Previously cached application pages.
+- Downloaded learning resources.
+- Previously downloaded notes.
+- Saved code projects.
+- Local project editing.
+- Supported local code execution.
+- Saved bookmarks.
+- Local learning progress.
+- Queued actions that can safely synchronize later.
+
+13.2 Offline Storage
+
+Use:
+
+- IndexedDB for browser project data and structured offline records.
+- Service Workers for application asset caching.
+- Platform-appropriate local storage on desktop and mobile.
+
+Avoid relying on localStorage for large files or complex project storage.
+
+13.3 Offline Execution
+
+Support local execution only when the required runtime or compiler is installed and available.
+
+Examples:
+
+- Browser-based HTML/CSS/JavaScript.
+- Python when a compatible local runtime is available.
+- C/C++ when a local compiler is installed.
+- Dart when a compatible local SDK is installed.
+- Node.js when a local runtime is installed.
+
+Other languages and frameworks require their respective runtimes, compilers, SDKs, and dependencies.
+
+13.4 Synchronization
+
+When connectivity returns:
+
+- Detect the connection.
+- Synchronize queued changes.
+- Retry recoverable failures.
+- Avoid duplicate submissions.
+- Resolve conflicting project updates.
+- Display synchronization status.
+- Preserve local work when synchronization fails.
+
+Use unique operation identifiers or idempotency mechanisms where appropriate.
+
+13.5 Offline Limitations
+
+Clearly explain when these features require connectivity:
+
+- Live video and audio.
+- Real-time messaging.
+- Internet research.
+- Cloud compilation.
+- Remote AI services.
+- Cloud-hosted databases.
+- Remote project collaboration.
+
+Provide a clear online/offline indicator.
+
+---
+
+14. PRACTICAL PROJECT WORKSPACE
+
+Create a dedicated module for practical software projects.
+
+Features:
+
+- Create project.
+- Select programming language.
+- Select a project template.
+- Add project description.
+- Manage files.
+- Run supported code.
+- Preview applications.
+- Save project.
+- Download project.
+- Share projects with authorized users.
+- Submit projects to teachers.
+- Receive feedback.
+- Track project completion.
+
+Support educational project categories such as:
+
+- Web applications.
+- APIs.
+- Database applications.
+- Desktop GUI applications.
+- Mobile applications.
+- Data science projects.
+- Networking exercises.
+
+Project sharing must respect ownership and permissions.
+
+---
+
+15. QUIZZES AND ASSESSMENTS
+
+Build a quiz module inspired by passcode-based classroom quiz systems.
+
+15.1 Teacher Features
+
+Teachers can:
+
+- Create quizzes.
+- Add questions.
+- Configure answers.
+- Set time limits.
+- Configure scoring.
+- Publish or unpublish quizzes.
+- Generate quiz access codes.
+- Review submissions.
+- Grade appropriate question types.
+- Export authorized results.
+
+15.2 Question Types
+
+Support:
+
+- Multiple choice.
+- True or False.
+- Short answer.
+- Programming questions.
+- Other question types through an extensible architecture.
+
+15.3 Student Features
+
+Students can:
+
+- Enter a quiz passcode.
+- View quiz instructions.
+- Complete questions.
+- Submit answers.
+- View results when permitted.
+- Review feedback.
+- Track their progress.
+
+15.4 Scoring and Leaderboards
+
+Implement:
+
+- Automatic grading for supported question types.
+- Teacher grading for questions requiring manual assessment.
+- Score history.
+- Quiz completion status.
+- Leaderboards where enabled.
+- Class-level statistics.
+- Personal progress charts.
+
+Do not reveal correct answers before the configured release time.
+
+Use server-side scoring rules and prevent unauthorized score modification.
+
+---
+
+16. ATTENDANCE MANAGEMENT
+
+Build an attendance module integrated with live classroom sessions.
+
+16.1 Attendance Information
+
+Record:
+
+- Student.
+- Classroom.
+- Lesson.
+- Join timestamp.
+- Leave timestamp.
+- Reconnection events where relevant.
+- Attendance status.
+- Authorized manual corrections.
+
+16.2 Automatic Attendance
+
+Track participation using server-side session events.
+
+Account for:
+
+- Late arrival.
+- Early departure.
+- Disconnection.
+- Reconnection.
+- Session duration.
+
+Do not assume that opening a dashboard proves classroom attendance.
+
+16.3 Teacher Controls
+
+Teachers can:
+
+- View attendance.
+- Review participant lists.
+- Mark authorized manual corrections.
+- Add permitted notes.
+- View attendance history.
+- Export reports.
+
+16.4 Reports
+
+Provide:
+
+- Daily reports.
+- Per-class reports.
+- Per-student reports.
+- Per-course summaries.
+- Attendance percentages.
+
+Protect student records from unauthorized access.
+
+---
+
+17. RECORDINGS
+
+Implement a dedicated recordings module.
+
+Features:
+
+- Record authorized live lessons.
+- Store lesson metadata.
+- Display recording duration.
+- Associate recordings with lessons.
+- Control access.
+- Allow playback.
+- Support download when permitted.
+- Configure retention.
+- Delete recordings according to policy.
+
+Recording operations must follow the applicable consent, privacy, and school policies.
+
+Do not assume that browser-based recording will work identically across every device and browser.
+
+Use appropriate server-side recording infrastructure when required.
+
+---
+
+18. CERTIFICATES
+
+Build a certificate generation and verification system.
+
+18.1 Certificate Eligibility
+
+Certificates may be awarded for:
+
+- Course completion.
+- Training completion.
+- Practical project completion.
+- Approved learning achievements.
+- Other administrator-configured criteria.
+
+18.2 Certificate Features
+
+- Certificate template management.
+- Student name.
+- Course or program title.
+- Issuing organization.
+- Authorized issuer.
+- Issue date.
+- Unique certificate ID.
+- Verification code or QR code.
+- Downloadable PDF.
+- Certificate history.
+- Revocation status where necessary.
+
+18.3 Permissions
+
+Only authorized teachers or administrators may issue certificates.
+
+Certificate eligibility must be based on recorded and approved completion criteria.
+
+The verification page must reveal only information approved for public verification.
+
+---
+
+19. NOTIFICATIONS AND ANNOUNCEMENTS
+
+19.1 Notifications
+
+Support notifications for:
+
+- New messages.
+- New lessons.
+- Live lesson invitations.
+- Upcoming lessons.
+- New quizzes.
+- Assignment deadlines.
+- Quiz results.
+- Certificates.
+- Announcements.
+- Important account events.
+
+Implement:
+
+- Read/unread status.
+- Notification counts.
+- Mark as read.
+- Mark all as read.
+- Relevant notification settings.
+
+19.2 Announcements
+
+Authorized administrators and teachers can publish announcements to:
+
+- An entire school.
+- A particular classroom.
+- A selected course.
+- A permitted group.
+
+Include:
+
+- Title.
+- Message.
+- Author.
+- Publication date.
+- Audience.
+- Optional attachments.
+- Publication status.
+
+Enforce audience restrictions on both API responses and user interfaces.
+
+---
+
+20. USER PROFILE
+
+Provide a profile page with:
+
+- Profile image.
+- First name.
+- Last name.
+- Email.
+- Class.
+- Trade, combination, or section.
+- Account role.
+- Learning statistics.
+- Project summary.
+- Certificates.
+- Account preferences.
+
+Support profile image upload with:
+
+- File type validation.
+- File size limits.
+- Secure storage.
+- Image processing where available.
+- Authorization checks.
+
+Sensitive account changes must require appropriate verification.
+
+---
+
+21. SETTINGS
+
+Provide settings for:
+
+- Profile preferences.
+- Language.
+- Theme.
+- Notification preferences.
+- Privacy.
+- Security.
+- Active sessions.
+- Password changes.
+- Accessibility.
+- Offline storage management.
+
+Display clear warnings before deleting local project data or cached learning resources.
+
+Allow users to sign out securely.
+
+Administrative settings must be restricted to authorized roles.
+
+---
+
+22. DATABASE DESIGN
+
+Use MySQL as the primary database.
+
+Design a normalized schema with appropriate foreign keys, unique constraints, indexes, and migrations.
+
+Consider the following logical entities:
+
+Identity and Organization
+
+- users
+- roles
+- permissions
+- user_roles
+- role_permissions
+- organizations
+- schools
+- school_memberships
+- classes
+- sections
+- subjects
+- student_enrollments
+- teacher_assignments
+
+Classroom Access
+
+- classrooms
+- classroom_memberships
+- classroom_rules
+- classroom_rule_acceptances
+- classroom_passcodes
+- classroom_invitations
+
+Live Classroom
+
+- live_sessions
+- live_session_participants
+- session_events
+- session_recordings
+- media_access_records, where appropriate
+
+Messaging
+
+- conversations
+- conversation_members
+- messages
+- message_attachments
+- message_read_receipts
+
+Learning Resources
+
+- courses
+- lessons
+- learning_materials
+- library_categories
+- library_resources
+- bookmarks
+- downloads_metadata
+
+Coding IDE
+
+- projects
+- project_members
+- project_files_metadata
+- project_versions
+- project_execution_jobs
+- project_submissions
+- project_feedback
+
+Quizzes
+
+- quizzes
+- quiz_questions
+- quiz_options
+- quiz_passcodes
+- quiz_attempts
+- quiz_answers
+- quiz_results
+
+Attendance
+
+- attendance_records
+- attendance_adjustments
+
+Certificates
+
+- certificate_templates
+- certificates
+- certificate_verification_records
+
+Notifications
+
+- notifications
+- announcements
+- announcement_audiences
+
+Security and Configuration
+
+- audit_logs
+- user_sessions
+- password_reset_tokens
+- email_verification_tokens
+- application_settings
+
+This is a proposed logical model, not a requirement to create every table blindly.
+
+Finalize relationships, data types, indexes, uniqueness constraints, deletion policies, and migration order before implementation.
+
+Use transactions for multi-step operations requiring consistency.
+
+Avoid storing large video files, recordings, and project archives directly in ordinary relational database columns.
+
+---
+
+23. API DESIGN
+
+Create a documented REST API with consistent naming and response structures.
+
+Potential endpoint groups:
+
+/api/auth
+/api/users
+/api/organizations
+/api/schools
+/api/classes
+/api/subjects
+/api/classrooms
+/api/classroom-access
+/api/live-sessions
+/api/messages
+/api/conversations
+/api/research
+/api/library
+/api/courses
+/api/lessons
+/api/projects
+/api/code-execution
+/api/quizzes
+/api/attendance
+/api/recordings
+/api/certificates
+/api/notifications
+/api/announcements
+/api/settings
+/api/admin
+
+Use appropriate HTTP methods and status codes.
+
+Requirements:
+
+- Authentication middleware.
+- Authorization middleware.
+- Request validation.
+- Consistent error handling.
+- Pagination.
+- Filtering.
+- Sorting.
+- Rate limiting.
+- API documentation.
+- Request logging that avoids sensitive information.
+
+Never trust a client-supplied user ID, role, score, or permission without server-side verification.
+
+---
+
+24. SECURITY REQUIREMENTS
+
+Treat security as a core architectural requirement.
+
+Implement:
+
+- Secure authentication.
+- Strong password hashing.
+- Authorization checks.
+- Input validation.
+- Output encoding.
+- Protection against SQL injection.
+- Protection against cross-site scripting.
+- Appropriate CSRF protection.
+- Secure cookie configuration.
+- Rate limiting.
+- Secure file uploads.
+- Safe file downloads.
+- Session expiration.
+- Audit logging.
+- Dependency management.
+- Environment-based secrets.
+- Secure error handling.
+- Backup and recovery procedures.
+
+Code Execution Security
+
+Untrusted code must execute outside the main application process in isolated environments.
+
+Do not provide code execution containers with unrestricted access to:
+
+- Production databases.
+- Application secrets.
+- Host filesystem.
+- Administrative credentials.
+- Internal cloud metadata services.
+- Unrestricted outbound networks.
+
+Apply CPU, memory, time, storage, and process limits.
+
+Review the threat model before exposing the coding IDE publicly.
+
+Privacy
+
+Collect only necessary personal data.
+
+Define retention policies.
+
+Restrict access to messages, attendance, recordings, and student information.
+
+Apply age-appropriate safeguards where children use the platform.
+
+---
+
+25. USER INTERFACE AND RESPONSIVE DESIGN
+
+Create a consistent visual design system.
+
+Requirements:
+
+- Professional educational interface.
+- Responsive desktop layouts.
+- Tablet layouts.
+- Mobile layouts.
+- Clear icons.
+- Consistent spacing.
+- Readable typography.
+- Accessible color contrast.
+- Keyboard navigation.
+- Visible focus states.
+- Form validation.
+- Loading indicators.
+- Empty states.
+- Error states.
+- Confirmation dialogs.
+- Toast notifications.
+- Light and dark modes.
+
+The live classroom must use an adaptive layout.
+
+The coding IDE must support resizable panels on appropriate screen sizes.
+
+On mobile, prioritize essential controls and provide accessible ways to switch between editor, output, terminal, and preview.
+
+Do not force a desktop-style multi-column interface onto a narrow mobile screen.
+
+---
+
+26. PERFORMANCE AND SCALABILITY
+
+Design for gradual growth.
+
+Implement:
+
+- Database indexing.
+- Pagination.
+- Lazy loading.
+- Efficient API responses.
+- Media quality adaptation.
+- Background processing.
+- Storage lifecycle management.
+- Connection monitoring.
+- Caching where appropriate.
+- Resource limits.
+- Monitoring and error reporting.
+
+Do not assume that one small server can safely support unlimited users, large-scale live video, AI requests, and code execution simultaneously.
+
+Keep media processing, code execution, and ordinary application APIs logically isolated so each can scale independently.
+
+---
+
+27. TESTING REQUIREMENTS
+
+Write tests throughout development.
+
+Unit Tests
+
+Test:
+
+- Validation.
+- Authorization policies.
+- Passcode expiration.
+- Quiz scoring.
+- Attendance calculations.
+- Certificate eligibility.
+- Offline synchronization rules.
+
+Integration Tests
+
+Test:
+
+- Registration.
+- Login.
+- Classroom access.
+- Passcode revocation.
+- Messaging.
+- File uploads.
+- Quiz submission.
+- Attendance recording.
+- Certificate issuance.
+- Project saving.
+
+End-to-End Tests
+
+Test the complete user journey:
+
+1. Student registers.
+2. Student logs in.
+3. Student accesses an authorized classroom.
+4. Student accepts classroom rules.
+5. Student opens the dashboard.
+6. Student joins an authorized live lesson.
+7. Student sends a message.
+8. Student opens a learning resource.
+9. Student creates a coding project.
+10. Student runs supported code.
+11. Student completes a quiz.
+12. Teacher reviews results.
+13. Teacher records attendance.
+14. Authorized issuer awards a certificate.
+
+Offline Tests
+
+Verify:
+
+- Cached pages open offline.
+- Saved projects remain available.
+- Supported local code execution works.
+- Offline changes are preserved.
+- Synchronization resumes when connectivity returns.
+- Failed synchronization does not silently destroy work.
+
+Security Tests
+
+Test:
+
+- Unauthorized classroom access.
+- Expired passcodes.
+- Revoked passcodes.
+- Cross-school data access.
+- Privilege escalation.
+- Unauthorized file downloads.
+- Code execution isolation.
+- API abuse prevention.
+
+Never declare a module fully tested merely because its interface renders.
+
+---
+
+28. DEVELOPMENT WORKFLOW
+
+Build the application incrementally.
+
+Do not generate the entire production system as one untested code dump.
+
+Before coding:
+
+1. Confirm requirements.
+2. Define architecture.
+3. Define repository structure.
+4. Design the database.
+5. Identify security boundaries.
+6. Define API contracts.
+7. Define acceptance criteria.
+
+For every development phase:
+
+1. Explain the purpose.
+2. List the files to create or update.
+3. Provide complete file contents when implementation is requested.
+4. Specify the exact file paths.
+5. Explain required dependencies.
+6. Provide database migrations.
+7. Explain environment configuration.
+8. Provide commands to run the application.
+9. Provide manual testing instructions.
+10. Provide automated tests.
+11. Fix errors before proceeding.
+12. Mark the phase TESTED only after the relevant tests pass.
+13. Provide appropriate Git commit instructions.
+
+Never omit required files while claiming a feature is complete.
+
+Do not overwrite existing project files without reviewing their contents and purpose.
+
+Use descriptive Git commits.
+
+Do not commit secrets or environment files containing credentials.
+
+---
+
+29. IMPLEMENTATION PHASES
+
+Develop the platform in the following order.
+
+PHASE 01 — Requirements, Architecture, Threat Model, and Repository Structure.
+
+PHASE 02 — Frontend and Backend Project Setup.
+
+PHASE 03 — MySQL Schema and Database Migrations.
+
+PHASE 04 — Registration, Login, Logout, and Password Recovery.
+
+PHASE 05 — Roles, Permissions, and Organization Boundaries.
+
+PHASE 06 — Classroom Management, Passcodes, and Rules Acceptance.
+
+PHASE 07 — Student Dashboard and Real Statistics.
+
+PHASE 08 — Inbox and Secure Messaging.
+
+PHASE 09 — Live Classroom and WebRTC Infrastructure.
+
+PHASE 10 — Participant Management and Attendance.
+
+PHASE 11 — Subjects, Courses, and Lessons.
+
+PHASE 12 — Digital Library and Offline Reading.
+
+PHASE 13 — Quizzes, Scoring, and Leaderboards.
+
+PHASE 14 — Coding IDE and Project Management.
+
+PHASE 15 — Isolated Code Execution and Live Preview.
+
+PHASE 16 — Offline Coding and Synchronization.
+
+PHASE 17 — Soma AI Research Engine.
+
+PHASE 18 — Recordings.
+
+PHASE 19 — Certificates and Verification.
+
+PHASE 20 — Notifications and Announcements.
+
+PHASE 21 — Profile and Settings.
+
+PHASE 22 — Desktop Application.
+
+PHASE 23 — Android and iOS Applications.
+
+PHASE 24 — Security Auditing, Performance Testing, and Deployment.
+
+Do not begin the next phase until the current phase has a working implementation and its defined acceptance tests have passed.
+
+---
+
+30. INITIAL DELIVERABLE
+
+For the first response, DO NOT generate the entire application.
+
+Instead, provide:
+
+1. A concise architecture overview.
+2. A complete proposed folder structure.
+3. A system module map.
+4. A proposed database entity relationship design.
+5. A list of security boundaries.
+6. A list of external services and optional dependencies.
+7. A development phase checklist.
+8. The acceptance criteria for Phase 01.
+9. A list of technical decisions that must be confirmed before implementation.
+
+Identify which features can be implemented without external services and which require external infrastructure, credentials, or additional hosting.
+
+Do not claim that any service is already configured or operational unless it has actually been configured and tested.
+
+After the initial architecture is reviewed, begin Phase 02 only when instructed.
+
+---
+
+FINAL PRODUCT STANDARD
+
+The final SmartClass Dev platform must be:
+
+- Functional.
+- Secure.
+- Responsive.
+- Maintainable.
+- Testable.
+- Accessible.
+- Extensible.
+- Suitable for educational use.
+- Capable of offline learning within clearly defined technical limits.
+- Designed to support future growth.
+
+The core mission is to ensure that students can continue learning, practicing software development, collaborating with classmates, and accessing educational resources even after leaving physical school.
+
+Build SmartClass Dev as a complete educational technology platform, not merely a collection of disconnected pages.
